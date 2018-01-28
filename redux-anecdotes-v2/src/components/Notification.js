@@ -1,7 +1,9 @@
 import React from 'react'
+import notificationReducer from '../reducers/notificationReducer'
 
 class Notification extends React.Component {
   render() {
+    const message = this.props.store.getState().notification
     const style = {
       border: 'solid',
       padding: 10,
@@ -9,7 +11,7 @@ class Notification extends React.Component {
     }
     return (
       <div style={style}>
-        render here notification...
+        {message}
       </div>
     )
   }

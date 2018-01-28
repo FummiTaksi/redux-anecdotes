@@ -20,14 +20,17 @@ const asObject = (anecdote) => {
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (store = initialState, action) => {
+  let copy = store.slice()
   switch(action.type) {
     case 'VOTE':
-      const copy = store.slice()
       copy.forEach((anecdote) => {
         if (anecdote.id === action.id) {
           anecdote.votes += 1
         }
       })
+      return copy
+    case 'CREATE':
+      copy.push(asObject(action.content))
       return copy
   }
   return store

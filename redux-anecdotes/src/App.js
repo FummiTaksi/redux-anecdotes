@@ -2,6 +2,23 @@ import React from 'react';
 
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      newAnecdote: ''
+    }
+  }
+
+  handleChange = (e) => {
+    e.preventDefault()
+    this.setState({newAnecdote: e.target.value})
+  }
+
+  createAnecdote = (e) => {
+    e.preventDefault()
+    this.props.store.dispatch({type: "CREATE", content: this.state.newAnecdote})
+  }
   render() {
     const anecdotes = this.props.store.getState().slice()
     anecdotes.sort((a , b) => {
@@ -18,7 +35,7 @@ class App extends React.Component {
             <div>
               has {anecdote.votes}
               <button 
-                onClick = {e => this.props.store.dispatch({type: "VOTE", id: anecdote.id })}
+                onClick = {(e) => this.props.store.dispatch({type: "VOTE", id: anecdote.id })}
               >
                 vote
               </button>
@@ -26,9 +43,9 @@ class App extends React.Component {
           </div>
         )}
         <h2>create new</h2>
-        <form>
-          <div><input /></div>
-          <button>create</button> 
+        <form onSubmit = {this.createAnecdote}>
+          <div><input onChange = {this.handleChange}/></div>
+          <button type= "submit">create</button> 
         </form>
       </div>
     )

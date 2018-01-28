@@ -20,7 +20,18 @@ const asObject = (anecdote) => {
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (store = initialState, action) => {
+  switch(action.type) {
+    case 'VOTE':
+      const copy = store.slice()
+      copy.forEach((anecdote) => {
+        if (anecdote.id === action.id) {
+          anecdote.votes += 1
+        }
+      })
+      return copy
+  }
   return store
 }
+
 
 export default reducer

@@ -1,7 +1,8 @@
 import React from 'react'
-import notificationReducer from '../reducers/notificationReducer'
+import notificationReducer, {notificationChange} from '../reducers/notificationReducer'
 
 class Notification extends React.Component {
+
   render() {
     const message = this.props.store.getState().notification
     const style = {
@@ -9,11 +10,23 @@ class Notification extends React.Component {
       padding: 10,
       borderWidth: 1
     }
-    return (
-      <div style={style}>
-        {message}
-      </div>
-    )
+    if (message === '') {
+      return (
+        <div></div>
+      )
+    }
+    else {
+      setTimeout(() => {
+        this.props.store.dispatch(notificationChange(''))
+      },5000)
+      return (
+        <div style={style}>
+          {message}
+        </div>
+      )
+
+    }
+
   }
 }
 

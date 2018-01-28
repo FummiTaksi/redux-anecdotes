@@ -1,7 +1,7 @@
-const initialState = "Welcome to anecdote-app"
+const initialState = ""
 
 const reducer = (store = initialState, action) => {
-    if (action.type === 'CHANGE') {
+    if (action.type === 'CHANGE_NOTIFICATION') {
         return action.message
     }
     return store
@@ -9,7 +9,7 @@ const reducer = (store = initialState, action) => {
 
 export const notificationChange = (message) => {
     return {
-        type: 'CHANGE',
+        type: 'CHANGE_NOTIFICATION',
         message: message
     }
 }

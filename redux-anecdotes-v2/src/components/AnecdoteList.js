@@ -29,7 +29,7 @@ class AnecdoteList extends React.Component {
     return (
       <div>
         <h2>Anecdotes</h2>
-        <FilterForm store={this.props.store}/>
+        <FilterForm/>
 
         {anecdotes.sort((a, b) => b.votes - a.votes).map(anecdote =>
           <div key={anecdote.id}>

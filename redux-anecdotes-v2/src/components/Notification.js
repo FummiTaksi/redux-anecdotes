@@ -1,27 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import notificationReducer, {notificationChange} from '../reducers/notificationReducer'
 
 class Notification extends React.Component {
 
   render() {
-    const message = this.props.store.getState().notification
+    const {notification} = this.props
     const style = {
       border: 'solid',
       padding: 10,
       borderWidth: 1
     }
-    if (message === '') {
+    if (notification === '') {
       return (
         <div></div>
       )
     }
     else {
       setTimeout(() => {
-        this.props.store.dispatch(notificationChange(''))
+        this.props.notificationChange('')
       },5000)
       return (
         <div style={style}>
-          {message}
+          {notification}
         </div>
       )
 
@@ -30,4 +31,19 @@ class Notification extends React.Component {
   }
 }
 
-export default Notification
+const mapStateToProps = (state) => {
+  return {
+    notification: state.notification
+  }
+}
+
+const mapDispatchToProps = {
+  notificationChange
+}
+
+const ConnectedNotification = connect(
+  mapStateToProps, 
+  mapDispatchToProps)
+  (Notification)
+
+export default ConnectedNotification

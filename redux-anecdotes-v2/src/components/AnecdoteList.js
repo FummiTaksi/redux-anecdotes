@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {anecdoteVote} from '../reducers/anecdoteReducer'
 import {notificationChange} from '../reducers/notificationReducer'
 import FilterForm from './FilterForm'
@@ -6,8 +7,8 @@ import FilterForm from './FilterForm'
 class AnecdoteList extends React.Component {
 
   voteAnecdote = (anecdote) => {
-    this.props.store.dispatch(anecdoteVote(anecdote.id))
-    this.props.store.dispatch(notificationChange("you voted '" + anecdote.content + "'"))
+    this.props.anecdoteVote(anecdote.id)
+    this.props.notificationChange("you voted '" + anecdote.content + "'")
   }
 
 
@@ -18,9 +19,7 @@ class AnecdoteList extends React.Component {
 }
 
   makeFilteredList = () => {
-    const state = this.props.store.getState()
-    const anecdotes = state.anecdotes
-    const filter = state.filter
+    const {anecdotes , filter} = this.props
     return anecdotes.filter((anecdote) => {
       return this.filterContainsInAnecdote(filter, anecdote.content)
     })
@@ -38,7 +37,7 @@ class AnecdoteList extends React.Component {
               {anecdote.content}
             </div>
             <div>
-              has {anecdote.votes}
+              has {anecdote.votes} votes
               <button onClick={() => this.voteAnecdote(anecdote)}>
                 vote
               </button>
@@ -50,4 +49,22 @@ class AnecdoteList extends React.Component {
   }
 }
 
-export default AnecdoteList
+const mapDispatchToProps = {
+  anecdoteVote,
+  notificationChange
+}
+
+const mapStateToProps = (state) => {
+  return {
+    anecdotes: state.anecdotes,
+    filter: state.filter
+  }
+
+}
+
+const ConnectedAnecdoteList = connect(
+  mapStateToProps,
+  mapDispatchToProps)
+  (AnecdoteList)
+
+export default ConnectedAnecdoteList

@@ -1,11 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {filterChange} from '../reducers/filterReducer'
 
-class AnecdoteForm extends React.Component {
+class FilterForm extends React.Component {
 
   handleChange = (e) => {
-    this.props.store.dispatch(filterChange(e.target.value))
+    this.props.filterChange(e.target.value)
   }
+
    render() {
      return (
        <div>
@@ -16,4 +18,9 @@ class AnecdoteForm extends React.Component {
    }
 }
 
-export default AnecdoteForm
+const mapDispatchToProps =  {
+  filterChange
+}
+
+const ConnectedFilterForm = connect(null,mapDispatchToProps)(FilterForm)
+export default ConnectedFilterForm

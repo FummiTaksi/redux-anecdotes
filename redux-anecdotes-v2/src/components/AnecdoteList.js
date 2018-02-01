@@ -46,7 +46,7 @@ const filterContainsInAnecdote = (filter,anecdote) => {
   return anecdoteLowCase.includes(filterLowCase);
 }
 const makeFilteredList = (anecdotes, filter) => {
-  return anecdotes.filter((anecdote) => {
+   return anecdotes.filter((anecdote) => {
     return filterContainsInAnecdote(filter, anecdote.content)
   })
 }

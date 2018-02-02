@@ -21,7 +21,6 @@ const reducer = (store = initialState, action) => {
   }
   if (action.type === 'CREATE') {
     const newList = [...store, action.content]
-    console.log("NEWLIST",newList)
     return newList
   }
   if (action.type === 'INIT') {
@@ -32,9 +31,12 @@ const reducer = (store = initialState, action) => {
 }
 
 export const anecdoteCreation = (content) => {
-  return {
-    type: 'CREATE',
-    content: content
+  return async (dispatch) => {
+    const response = await anecdoteService.create(content)
+    dispatch({
+      type: 'CREATE',
+      content: response
+    })
   }
 }
 

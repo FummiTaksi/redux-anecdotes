@@ -14,8 +14,12 @@ const initialState = []
 
 const reducer = (store = initialState, action) => {
   if (action.type === 'VOTE') {
-    console.log("STORE",store)
-    return store
+    const notVoted = store.filter(a => a.id !== action.id)
+    const voted = store.find(a => a.id === action.id)
+    const changed = { ...voted, votes: voted.votes + 1 }
+    return store.map((anecdote => {
+      return anecdote.id === action.id ? changed : anecdote
+    }))
   }
   if (action.type === 'CREATE') {
     console.log("CREATE STORE",store)
@@ -42,8 +46,7 @@ export const anecdoteCreation = (content) => {
 
 export const anecdoteVote = (anecdote) => {
   return async (dispatch) => {
-    anecdote.votes += 1
-    const response = await anecdoteService.update(anecdote)
+    const response = await anecdoteService.update({ ...anecdote, votes: anecdote.votes + 1 })
     console.log("RESPONSE",response)
     dispatch({
       type: 'VOTE',

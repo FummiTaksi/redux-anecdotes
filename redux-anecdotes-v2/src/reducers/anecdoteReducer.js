@@ -14,13 +14,16 @@ const initialState = []
 
 const reducer = (store = initialState, action) => {
   if (action.type === 'VOTE') {
+    console.log("STORE",store)
     return store
   }
   if (action.type === 'CREATE') {
+    console.log("CREATE STORE",store)
     const newList = [...store, action.content]
     return newList
   }
   if (action.type === 'INIT') {
+    console.log("INIT")
     return action.content
   }
 

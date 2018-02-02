@@ -18,7 +18,7 @@ class Notification extends React.Component {
     }
     else {
       setTimeout(() => {
-        this.props.notificationChange('')
+        this.props.notificationChange('',1)
       },5000)
       return (
         <div style={style}>

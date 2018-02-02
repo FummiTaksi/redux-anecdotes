@@ -8,7 +8,7 @@ class AnecdoteList extends React.Component {
 
   voteAnecdote = async(anecdote) => {
     this.props.anecdoteVote(anecdote)
-    this.props.notificationChange("you voted '" + anecdote.content + "'")
+    this.props.notificationChange("you voted '" + anecdote.content + "'", 3)
   }
 
   render() {

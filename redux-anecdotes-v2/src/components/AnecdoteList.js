@@ -2,13 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {anecdoteVote} from '../reducers/anecdoteReducer'
 import {notificationChange} from '../reducers/notificationReducer'
-import anecdoteService from '../services/anecdotes'
 import FilterForm from './FilterForm'
 
 class AnecdoteList extends React.Component {
 
   voteAnecdote = async(anecdote) => {
-    const response = await anecdoteService.vote(anecdote)
+    this.props.anecdoteVote(anecdote)
     this.props.notificationChange("you voted '" + anecdote.content + "'")
   }
 

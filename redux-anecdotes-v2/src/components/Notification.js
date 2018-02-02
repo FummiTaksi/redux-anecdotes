@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import notificationReducer, {notificationChange} from '../reducers/notificationReducer'
+import {notificationChange} from '../reducers/notificationReducer'
 
 class Notification extends React.Component {
 

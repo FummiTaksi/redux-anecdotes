@@ -12,4 +12,12 @@ const create = async (object) => {
   return response.data
 }
 
-export default { getAll , create}
+const vote = async(object) => {
+  object.votes += 1
+
+  const urlOfObject = baseUrl + "/" + object.id
+  const response = await axios.put(urlOfObject, object)
+  return response.data
+}
+
+export default { getAll , create, vote}

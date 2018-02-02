@@ -8,7 +8,6 @@ class AnecdoteForm extends React.Component {
 
   handleSubmit = async(e) => {
     const createdAnecdote = await anecdoteService.create(asObject(e.target.anecdote.value))
-    this.props.anecdoteCreation(createdAnecdote)
     this.props.notificationChange("you created anecdote '" + createdAnecdote.content + "'")
     e.target.anecdote.value = ''
   }
